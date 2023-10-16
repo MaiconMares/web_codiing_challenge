@@ -1,6 +1,32 @@
 # web_coding_challenge
 Repository created to store the project from Stant's challenge
 
+## Configurações necessárias
+### Criação do usuário padrão para o banco de dados
+<p>
+Antes de criar o banco de dados e rodar as migrações é necessário criar o usuário padrão que possui acesso ao banco.
+</br>
+Execute o comando (Linux):
+</br>
+<strong>sudo -u postgres createuser -s tesla -P</strong>
+</br>
+Informe a senha <strong>'tesla123'</strong>.
+</p>
+
+### Criação do banco e migrações
+<p>
+Após criado o usuário crie o banco e execute as migrações com o comando:
+<strong>
+rails db:setup
+</strong>
+</br>ou
+</br>
+<strong>
+rails db:create db:migrate
+</strong>
+</p>
+
+
 ## Modelagem do Banco de Dados
 ### Modelo Entidade Relacionamento - MER
 
