@@ -23,7 +23,7 @@ Cardinalidade: 1:n</p>
 
 
 ### Diagrama Entidade Relacionamento - DER
-![DER_Web_Coding_Challenge](https://github.com/MaiconMares/web_coding_challenge/assets/47460478/4e87210c-3c1e-4378-a83b-9043d0c99695)
+![DER_Web_Coding_Challenge](https://github.com/MaiconMares/web_coding_challenge/assets/47460478/dd9f65d9-35cb-4ee2-9867-f964cacbe1f1)
 
 ### Diagrama Lógico de Dados - DLD
 ![DLD_Web_Coding_Challenge](https://github.com/MaiconMares/web_coding_challenge/assets/47460478/56462bff-e970-4dbf-9ed6-655f208a9457)
