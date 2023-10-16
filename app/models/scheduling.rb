@@ -1,0 +1,2 @@
+class Scheduling < ApplicationRecord
+end
