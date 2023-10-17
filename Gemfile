@@ -67,6 +67,8 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
+  gem "minitest"
+  gem "pry-nav"
   gem "capybara"
   gem "selenium-webdriver"
 end

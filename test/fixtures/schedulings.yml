@@ -2,8 +2,8 @@
 
 one:
   active: false
-  occurrenceDate: 2023-10-15
+  occurrence_date: 2023-10-15
 
 two:
   active: false
-  occurrenceDate: 2023-10-15
+  occurrence_date: 2023-10-15
