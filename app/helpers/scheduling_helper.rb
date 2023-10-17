@@ -31,8 +31,8 @@ module SchedulingHelper
           last_morning_start += duration
 
           tracks["track_#{track_id}"]['morning'] << {
-            "name" => name, "duration" => duration, 
-            "start_time" => start_time, "end_time" => end_time
+            "nome" => name, "duracao" => duration, 
+            "inicio" => start_time, "fim" => end_time
           }
 
           remaining_morning_time -= duration
@@ -43,8 +43,8 @@ module SchedulingHelper
           last_afternoon_start += duration
 
           tracks["track_#{track_id}"]['afternoon'] << {
-            "name" => name, "duration" => duration,
-            "start_time" => start_time, "end_time" => end_time
+            "nome" => name, "duracao" => duration,
+            "inicio" => start_time, "fim" => end_time
           }
 
           remaining_afternoon_time -= duration
@@ -59,7 +59,7 @@ module SchedulingHelper
       end
     end
 
-    tracks
+    tracks.with_indifferent_access
   end
 
   def extract_conferences_from_file(file_path)
@@ -109,8 +109,8 @@ module SchedulingHelper
         last_morning_start += duration
 
         track['morning'] << {
-          "name" => name, "duration" => duration, 
-          "start_time" => start_time, "end_time" => end_time
+          "nome" => name, "duracao" => duration, 
+          "inicio" => start_time, "fim" => end_time
         }
 
         remaining_morning_time -= duration
@@ -121,8 +121,8 @@ module SchedulingHelper
         last_afternoon_start += duration
 
         track['afternoon'] << {
-          "name" => name, "duration" => duration,
-          "start_time" => start_time, "end_time" => end_time
+          "nome" => name, "duracao" => duration,
+          "inicio" => start_time, "fim" => end_time
         }
 
         remaining_afternoon_time -= duration
@@ -133,5 +133,19 @@ module SchedulingHelper
     conferences.delete_if {|conf| conferences_to_remove.include?(conf["id"])}
 
     [track, conferences]
+  end
+
+  def sanitize_response(scheduling)
+    response = {}
+    
+    tracks = @scheduling.keys
+    tracks.each do |track|
+      events = @scheduling[track][:morning]
+      events << {:nome => "Almoço", :duracao => 60, :inicio => "12:00", :fim => "13:00"}
+      response[track] = events + @scheduling[track][:afternoon]
+      response[track] << {:nome => "Evento de Networking", :inicio => "17:00"}
+    end
+
+    response
   end
 end

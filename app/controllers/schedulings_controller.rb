@@ -22,7 +22,9 @@ class SchedulingsController < ApplicationController
 
       @scheduling = schedule_conferences_optimal(registered_conferences)
 
-      render json: @scheduling
+      response = sanitize_response(@scheduling)
+
+      render json: response
     else
       render json: @schedule.errors, status: :unprocessable_entity
     end
