@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_16_011507) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_16_171330) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,9 +23,10 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_16_011507) do
 
   create_table "schedulings", force: :cascade do |t|
     t.boolean "active"
-    t.date "occurrenceDate"
+    t.date "occurrence_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "file"
   end
 
   create_table "tracks", force: :cascade do |t|
