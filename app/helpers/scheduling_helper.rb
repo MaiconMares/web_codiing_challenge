@@ -138,11 +138,11 @@ module SchedulingHelper
   def sanitize_response(scheduling)
     response = {}
     
-    tracks = @scheduling.keys
+    tracks = scheduling.keys
     tracks.each do |track|
-      events = @scheduling[track][:morning]
+      events = scheduling[track][:morning]
       events << {:nome => "Almoço", :duracao => 60, :inicio => "12:00", :fim => "13:00"}
-      response[track] = events + @scheduling[track][:afternoon]
+      response[track] = events + scheduling[track][:afternoon]
       response[track] << {:nome => "Evento de Networking", :inicio => "17:00"}
     end
 
