@@ -20,7 +20,8 @@ module SchedulingHelper
       last_morning_start = 540
       last_afternoon_start = 780
       
-      for conference in conferences
+      conferences_to_remove = []
+      conferences.each_with_index do |conference, idx|
         name = conference["name"]
         duration = conference["duration"]
     
@@ -35,7 +36,7 @@ module SchedulingHelper
           }
 
           remaining_morning_time -= duration
-          conferences.shift
+          conferences_to_remove << conference["id"]
         elsif remaining_afternoon_time >= duration
           start_time = get_start_time(last_afternoon_start)
           end_time = get_end_time(last_afternoon_start, duration)
@@ -47,8 +48,14 @@ module SchedulingHelper
           }
 
           remaining_afternoon_time -= duration
-          conferences.shift
+          conferences_to_remove << conference["id"]
         end
+      end
+
+      conferences.delete_if {|conf| conferences_to_remove.include?(conf["id"])}
+
+      if (remaining_morning_time || remaining_afternoon_time)
+        tracks["track_#{track_id}"], conferences = explore_remaining_time_frame(tracks["track_#{track_id}"], conferences, remaining_morning_time, remaining_afternoon_time)
       end
     end
 
@@ -85,5 +92,46 @@ module SchedulingHelper
 
   def get_end_time(elapsed_time, duration)
     Time.at((elapsed_time+duration)*60).utc.strftime('%H:%M')
+  end
+
+  def explore_remaining_time_frame(track, conferences, remaining_morning_time, remaining_afternoon_time)
+    last_morning_start = 720 - remaining_morning_time
+    last_afternoon_start = 1020 - remaining_afternoon_time
+
+    conferences_to_remove = []
+    conferences.to_enum.with_index.reverse_each do |conference, idx|
+      name = conference["name"]
+      duration = conference["duration"]
+  
+      if remaining_morning_time >= duration
+        start_time = get_start_time(last_morning_start)
+        end_time = get_end_time(last_morning_start, duration)
+        last_morning_start += duration
+
+        track['morning'] << {
+          "name" => name, "duration" => duration, 
+          "start_time" => start_time, "end_time" => end_time
+        }
+
+        remaining_morning_time -= duration
+        conferences_to_remove << conference["id"]
+      elsif remaining_afternoon_time >= duration
+        start_time = get_start_time(last_afternoon_start)
+        end_time = get_end_time(last_afternoon_start, duration)
+        last_afternoon_start += duration
+
+        track['afternoon'] << {
+          "name" => name, "duration" => duration,
+          "start_time" => start_time, "end_time" => end_time
+        }
+
+        remaining_afternoon_time -= duration
+        conferences_to_remove << conference["id"]
+      end
+    end
+
+    conferences.delete_if {|conf| conferences_to_remove.include?(conf["id"])}
+
+    [track, conferences]
   end
 end
