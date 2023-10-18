@@ -26,6 +26,12 @@ rails db:create db:migrate
 </strong>
 </p>
 
+## Uso
+<p>
+  Para realizar o envio de arquivos para o endpoint utilize o formato form-data, no corpo (body) adicione o campo 'file' e faça o upload do arquivo. Exemplo:
+  <img src="https://github.com/MaiconMares/web_coding_challenge/assets/47460478/9f6f53bb-33ef-43de-a32e-de679c3b8233"/>
+</p>
+<strong>Obs.: a aplicação aceita apenas arquivos .txt</strong>
 
 ## Modelagem do Banco de Dados
 ### Modelo Entidade Relacionamento - MER
