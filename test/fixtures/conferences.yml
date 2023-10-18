@@ -1,0 +1,37 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: "Diminuindo tempo de execução de testes em aplicações Rails enterprise"
+  duration: 60
+
+two:
+  name: "Reinventando a roda em ASP clássico"
+  duration: 45
+
+three:
+  name: "Apresentando Lua para as massas"
+  duration: 30
+
+four:
+  name: "Erros de Ruby oriundos de versões erradas de gems"
+  duration: 45
+
+five:
+  name: "Erros comuns em Ruby"
+  duration: 45
+
+six:
+  name: "Rails para usuários de Django"
+  duration: 5
+
+seven:
+  name: "Trabalho remoto: prós e cons"
+  duration: 60
+
+eight:
+  name: "Desenvolvimento orientado a gambiarras"
+  duration: 45
+
+nine:
+  name: "Aplicações isomórficas: o futuro (que talvez nunca chegaremos)"
+  duration: 30
