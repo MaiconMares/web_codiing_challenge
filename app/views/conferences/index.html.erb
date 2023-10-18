@@ -1,0 +1,54 @@
+<div class="container">
+  <% if flash[:success].present? %>
+    <p><%= flash[:success] %></p>
+  <% end %>
+  <div class="row">
+    <div class="col">
+      <% btn_string = 
+        '<button type="button" class="btn btn-success">
+        Adicionar<i class="fa-solid fa-square-plus"></i>
+        </button>' 
+      %>
+      
+        <%= link_to btn_string.html_safe, new_conference_path %>
+      
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <table class="table">
+        <thead>
+          <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Duração</th>
+          <th scope="col">Visualizar</th>
+          <th scope="col">Editar</th>
+          <th scope="col">Excluir</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% @conferences.each do |conference| %>
+                <tr>
+                    <th scope="row"><%= conference.id%></th>
+                    <td><%= conference.name%></td>
+                    <td><%= conference.duration%></td>
+                    <td>
+                      <%= link_to '<i class="fa-solid fa-eye"></i>'.html_safe, conference_path(conference) %>
+                    </td>
+                    <td>
+                        <%= link_to "<i class='fa-solid fa-pen-to-square'></i>".html_safe, edit_conference_path(conference) %>
+                    </td>
+                    <td>
+                        <%= button_to "<i class='fa-solid fa-trash' style='color:#fc3003'></i>".html_safe, conference_path(conference), data: {
+                            turbo_method: :delete,
+                            turbo_confirm: "Tem certeza que deseja remover esta conferência?"
+                        } %>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+        </table>
+    </div>
+  </div>
+</div>

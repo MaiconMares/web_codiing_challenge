@@ -23,5 +23,16 @@ module WebCodingChallenge
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # Habilita o acesso a nossa API por meio de aplicacoes externas
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', :headers => :any, :methods => [:post, :options]
+      end
+    end
+    config.api_only = true
+
+    config.middleware.use ActionDispatch::Flash
   end
 end
